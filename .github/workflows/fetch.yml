@@ -1,0 +1,41 @@
+name: Fetch MK Libraries
+
+on:
+  schedule: [{ cron: "0 5 * * *" }]   # daily run at 05:00 UTC
+  workflow_dispatch:                  # manual “Run workflow” button
+
+# avoid overlapping
+concurrency:
+  group: fetch-mk-libraries
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read           # change to write if committing back to repo
+      actions: read
+      id-token: none
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"         # simple pip cache
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Run harvester
+        run: python harvester.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-knihoven
+          path: downloads/
