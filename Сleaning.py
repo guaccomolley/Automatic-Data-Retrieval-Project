@@ -42,10 +42,10 @@ def normalize_psc(x):
     m = re.search(r"\b(\d{3})\s?(\d{2})\b", str(x))
     return (m.group(1) + m.group(2)) if m else pd.NA
 
-# -------- načtení & rename --------
+
 
 df = pd.read_excel("downloads/library-records_latest.xlsx")
-
+# dict with keys as original names and values as new names
 rename_map = {
     "R - EVIDENČNÍ ČÍSLO KNIHOVNY": "evidencni_cislo",
     "I - NÁZEV KNIHOVNY": "nazev_knihovny",
@@ -97,7 +97,7 @@ for c in ["datum_vytvoreni","datum_evidence","datum_aktualizace","datum_vyrazeni
     if c in df.columns:
         df[c] = pd.to_datetime(df[c], errors="coerce")
 
-# -------- ASCII pomocné sloupce (loop) --------
+# ASCII additional columns
 
 ascii_cols = {
     "nazev_knihovny": "nazev_ascii",
