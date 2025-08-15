@@ -21,22 +21,17 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
 
          ┌───────────────────┐
          │ Data Source        │
-         │ (e.g., API, Web)   │
+         │ (in our case Web)  │
          └─────────┬─────────┘
                    │
                    ▼
         ┌─────────────────────┐
         │ Data Retrieval Script│
-        │  (e.g., Python)      │
+        │  (Python)            │
         └─────────┬───────────┘
                   │
+                  │
                   ▼
-      ┌──────────────────────────┐
-      │ Secure Transfer Protocol  │
-      │ (HTTPS / SFTP)            │
-      └──────────┬───────────────┘
-                 │
-                 ▼
       ┌──────────────────────────┐
       │ Secure Storage            │
       │  - Database (PostgreSQL)  │
