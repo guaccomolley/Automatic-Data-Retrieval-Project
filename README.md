@@ -16,6 +16,62 @@ The data transformation was done in the next way:
   9. Exporting dataframe as CSV file with UTF-8 encoding.
      
 
-##
+## SUSURITI
+blablabla
 
-##
+## Describing dataset usig CCMM
+Below you can see the JSON description of the source of the data. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
+```
+{
+  "id": "https://example.org/meta/evidence-knihoven",
+  "language": "ces",
+  "date_created": "2025-08-15",
+  "date_updated": "2025-08-15",
+
+  "patron": {
+    "given_name": "TODO",
+    "family_name": "TODO",
+    "email": []
+  },
+
+  "data_provider": {
+    "organisation": {
+      "name": "Ministerstvo kultury České republiky",
+      "url": "https://mk.gov.cz",
+      "organisation_category": "Government",
+      "contact_person": {
+        "given_name": "TODO",
+        "family_name": "TODO",
+        "email": []
+      }
+    }
+  },
+
+  "data_specification": {
+    "title": "Evidence knihoven – adresář knihoven evidovaných MK ČR",
+    "identifier": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
+    "description": "Oficiální adresář veřejných a dalších knihoven evidovaných Ministerstvem kultury ČR včetně souvisejících informací.",
+    "version": "1.0",
+    "subject": ["knihovny", "evidence knihoven", "Česko"],
+    "statements": {
+      "terms_of_use": "TODO (podmínky užití dle stránky MK)",
+      "data_licence": "TODO (např. CC BY 4.0 / neudáno)",
+      "expenses": "0 (stáhnuto z veřejného webu)",
+      "provenance": "Staženo z oficiální stránky MK ČR."
+    },
+    "data_categories": {
+      "data_structure": "Tabular",
+      "data_sensitivity": "Public Data",
+      "data_updates": "Periodically updated",
+      "date_embargo": ""
+    },
+    "distribution": {
+      "data_format": "text/csv",
+      "access_instructions": "Aktuální soubor hledejte na stránce MK.",
+      "access_url": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341"
+      /* "download_url": "TODO" */
+    }
+  }
+}
+
+```
