@@ -20,6 +20,7 @@ The data transformation was done in the next way:
 blablabla
 
 ## Describing dataset usig CCMM
+#### JSON for source
 Below you can see the JSON description of the source of the data. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
 ```
 {
@@ -73,5 +74,107 @@ Below you can see the JSON description of the source of the data. The used metad
     }
   }
 }
+
+```
+#### JSON scheme for libraries according to our dataset
+```
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EvidenceKnihovenSchema",
+  "type": "array",
+  "description": "Seznam knihoven evidovaných Ministerstvem kultury (array knihovních záznamů)",
+  "items": {
+    "type": "object",
+    "description": "Záznam jedné knihovny v evidenci",
+    "properties": {
+      "nazev_knihovny": {
+        "type": "string",
+        "description": "Název knihovny"
+      },
+      "evidencni_cislo": {
+        "type": "string",
+        "description": "Evidenční číslo knihovny (unikátní registrační číslo)",
+        "pattern": "^[0-9]+/[0-9]{4}$"
+      },
+      "adresa": {
+        "type": "object",
+        "description": "Adresa knihovny",
+        "properties": {
+          "ulice": {
+            "type": "string",
+            "description": "Ulice a číslo popisné"
+          },
+          "mesto": {
+            "type": "string",
+            "description": "Město nebo obec"
+          },
+          "psc": {
+            "type": "string",
+            "description": "PSČ (poštovní směrovací číslo)",
+            "pattern": "^[0-9]{3}\\s?[0-9]{2}$"
+          },
+          "kraj": {
+            "type": "string",
+            "description": "Kraj (region)",
+            "examples": ["Hlavní město Praha", "Jihomoravský kraj"]
+          }
+        },
+        "required": ["ulice", "mesto", "psc", "kraj"],
+        "additionalProperties": false
+      },
+      "pravni_forma": {
+        "type": "string",
+        "description": "Právní forma organizace knihovny"
+      },
+      "typ_knihovny": {
+        "type": "string",
+        "description": "Typ (druh) knihovny"
+      },
+      "zrizovatel": {
+        "type": "string",
+        "description": "Zřizovatel knihovny (zakladatel/provozovatel)"
+      },
+      "kontaktni_udaje": {
+        "type": "object",
+        "description": "Kontaktní údaje knihovny",
+        "properties": {
+          "telefon": {
+            "type": "string",
+            "description": "Telefonní číslo",
+            "pattern": "^[+]?[0-9 ]+$"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "E-mailová adresa"
+          },
+          "web": {
+            "type": "string",
+            "format": "uri",
+            "description": "Webové stránky knihovny (URL)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "datum_evidence": {
+        "type": "string",
+        "format": "date",
+        "description": "Datum evidence knihovny (datum registrace v evidenci)"
+      }
+    },
+    "required": [
+      "nazev_knihovny",
+      "evidencni_cislo",
+      "adresa",
+      "pravni_forma",
+      "typ_knihovny",
+      "zrizovatel",
+      "kontaktni_udaje",
+      "datum_evidence"
+    ],
+    "additionalProperties": false
+  }
+}
+
 
 ```
