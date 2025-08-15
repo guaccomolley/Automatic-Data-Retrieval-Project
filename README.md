@@ -21,7 +21,7 @@ blablabla
 
 ## Describing dataset usig CCMM
 #### JSON for source
-Below you can see the JSON description of the source of the data. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
+Below you can see how the JSON description of the source of the data can look. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
 ```
 {
   "id": "https://example.org/meta/evidence-knihoven",
