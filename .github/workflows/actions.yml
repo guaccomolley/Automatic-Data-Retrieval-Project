@@ -3,8 +3,7 @@ name: run Retrieval.py
 on:
   schedule:
     - cron: "*/10 * * * *"   # every 10 minutes
-
-# <-- give the job write access to the repo contents
+    
 permissions:
   contents: write
 
