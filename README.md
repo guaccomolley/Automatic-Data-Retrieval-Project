@@ -18,32 +18,37 @@ The data transformation was done in the next way:
 
 ## Data Storage and Security
 To ensure permanent and secure storage of the downloaded data, we would use a central repository with regular backups, such as a database (PostgreSQL, MySQL) or a file system on a secured server. Access would be restricted to authorized users through authentication and encryption
-
-         ┌───────────────────┐
-         │ Data Source        │
-         │ (in our case Web)  │
-         └─────────┬─────────┘
+           ┌────────────────────┐       
+           │   Scheduler/Trigger│
+           │ (cron/systemd/CI)  │        
+           └─────────┬──────────┘
+                     │                              
+                     ▼                              
+          ┌──────────────────────┐                  
+          │ Data Retrieval Script│
+          │       (Python)       │
+          └─────────┬────────────┘
+                    │  SFTP (SSH)  ←— secure transfer (auth + encryption)
+                    ▼
+        ┌──────────────────────────┐
+        │   Secure Storage (Prod)  │
+        │  - PostgreSQL (TDE/KMS)  │
+        │  - Encrypted filesystem  │
+        └──────────┬───────────────┘
                    │
                    ▼
-        ┌─────────────────────┐
-        │ Data Retrieval Script│
-        │  (Python)            │
-        └─────────┬───────────┘
-                  │
+       ┌─────────────────────────────┐
+       │ Backups & Versioning        │  (3-2-1, offsite, immutability)
+       │ + periodic restore testing  │
+       └──────────┬──────────────────┘
                   │
                   ▼
-      ┌──────────────────────────┐
-      │ Secure Storage            │
-      │  - Database (PostgreSQL)  │
-      │  - Encrypted Filesystem   │
-      └──────────┬───────────────┘
-                 │
-                 ▼
-     ┌──────────────────────────────┐
-     │ Backups & Versioning          │
-     │  - Regular Backups            │
-     │  - Historical Data Archive    │
-     └──────────────────────────────┘
+        ┌──────────────────────────┐
+        │ Observability & Audits   │
+        │ (logs, metrics, alerts,  │
+        │  provenance)             │
+        └──────────────────────────┘
+
 
 ## Describing dataset usig CCMM
 #### JSON for source
