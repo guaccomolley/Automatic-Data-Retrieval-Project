@@ -19,6 +19,37 @@ The data transformation was done in the next way:
 ## Data Storage and Security
 To ensure permanent and secure storage of the downloaded data, we would use a central repository with regular backups, such as a database (PostgreSQL, MySQL) or a file system on a secured server. Access would be restricted to authorized users through authentication and encryption
 
+         ┌───────────────────┐
+         │ Data Source        │
+         │ (e.g., API, Web)   │
+         └─────────┬─────────┘
+                   │
+                   ▼
+        ┌─────────────────────┐
+        │ Data Retrieval Script│
+        │  (e.g., Python)      │
+        └─────────┬───────────┘
+                  │
+                  ▼
+      ┌──────────────────────────┐
+      │ Secure Transfer Protocol  │
+      │ (HTTPS / SFTP)            │
+      └──────────┬───────────────┘
+                 │
+                 ▼
+      ┌──────────────────────────┐
+      │ Secure Storage            │
+      │  - Database (PostgreSQL)  │
+      │  - Encrypted Filesystem   │
+      └──────────┬───────────────┘
+                 │
+                 ▼
+     ┌──────────────────────────────┐
+     │ Backups & Versioning          │
+     │  - Regular Backups            │
+     │  - Historical Data Archive    │
+     └──────────────────────────────┘
+
 ## Describing dataset usig CCMM
 #### JSON for source
 Below you can see how the JSON description of the source of the data can look. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
