@@ -61,9 +61,10 @@ Below you can see how the JSON description of the source of the data can look. T
   "date_updated": "2025-08-15",
 
   "patron": {
-    "given_name": "TODO",
-    "family_name": "TODO",
-    "email": []
+    "given_name": "Bob",
+    "family_name": "Novák",
+    "email": ["bob.novak@example.org"]
+    "phone"
   },
 
   "data_provider": {
@@ -72,9 +73,9 @@ Below you can see how the JSON description of the source of the data can look. T
       "url": "https://mk.gov.cz",
       "organisation_category": "Government",
       "contact_person": {
-        "given_name": "TODO",
-        "family_name": "TODO",
-        "email": []
+        "given_name": "Alice",
+        "family_name": "Novakova",
+        "email": ["alice.novakova@example.org"]
       }
     }
   },
@@ -86,9 +87,9 @@ Below you can see how the JSON description of the source of the data can look. T
     "version": "1.0",
     "subject": ["knihovny", "evidence knihoven", "Česko"],
     "statements": {
-      "terms_of_use": "TODO (podmínky užití dle stránky MK)",
-      "data_licence": "TODO (např. CC BY 4.0 / neudáno)",
-      "expenses": "0 (stáhnuto z veřejného webu)",
+      "terms_of_use": ""Použití dat se řídí podmínkami zveřejněnými na webu MK ČR.",
+      "data_licence": "Neudáno",
+      "expenses": "0 CZK",
       "provenance": "Staženo z oficiální stránky MK ČR."
     },
     "data_categories": {
