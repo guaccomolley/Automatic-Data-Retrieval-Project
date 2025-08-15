@@ -1,8 +1,7 @@
 name: run Retrieval.py
-
 on:
   schedule:
-    - cron: "*/10 * * * *"   #schedule
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
@@ -29,20 +28,15 @@ jobs:
 
       - name: Run downloader
         run: |
-          echo "Workspace: $GITHUB_WORKSPACE"
           python Retrieval.py
-          ls -la downloads
+          echo "=== ls downloads ==="
+          ls -la downloads || true
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # show what changed
-          git status
-          # add the new/updated files
           git add downloads/*.xlsx downloads/*.sha256 || true
-          # create a commit only if there are staged changes
-          git diff --staged --quiet || git commit -m "Add libraries XLSX ($(date -u +'%Y-%m-%d'))"
-          # make sure we’re up to date, then push to the current branch
+          git diff --staged --quiet || git commit -m "add/download: libraries XLSX $(date -u +'%F %T')"
           git pull --rebase origin "${{ github.ref_name }}"
           git push origin HEAD:"${{ github.ref_name }}"
