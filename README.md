@@ -12,7 +12,7 @@ The data transformation was done in the next way:
   5. Removing of nonsense in **knihovna_web** column
   6. Making ASCII columns from the most important string columns to provide names without diacritics.
   7. Normalising **knihovna_psc** on 5 digits
-  8. The dates are transformed on **datetime**
+  8. The dates are transformed on **datetime** according to ISO 8601 standard.
   9. Exporting dataframe as CSV file with UTF-8 + BOM, so it can be used in SQL or Excel.
      
 
