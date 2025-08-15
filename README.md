@@ -20,7 +20,7 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
 ```
            ┌────────────────────┐       
            │   Scheduler/Trigger│
-           │ (cron/systemd/CI)  │        
+           │(cron/WTS/GitHubAct.)│        
            └─────────┬──────────┘
                      │                              
                      ▼                              
