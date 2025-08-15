@@ -1,7 +1,7 @@
 ## Automatic Data Parcing of libraries database
 This section is dedicated to Data Parcing Process implemented in Python. The data parcing from HTML page was made using library **BeautifulSoup**. The script extracts the URL for the .xlsx file and then downloads it. This way, we don't need a fixed file name, which changes with the date when the new dataset is uploaded. The file is being saved with a date stamp (e.g., library-records_2025-08-06.xlsx) and also as latest (library-records_latest.xlsx). The SHA-256 hash is used to verify file integrity, detect changes, and safely archive only new versions without storing duplicates.
 #### Automatization of the script
-For our purposes, we used GitHub Actions to schedule and execute the process. In a real-world local deployment scenario, this could alternatively be handled using **Windows Task Scheduler** on Windows or **cron** on Linux.
+For our purposes, we used GitHub Actions to schedule and execute the process. We arbitrary chose to execute the script each Wednesday at 13:00. In a real-world local deployment scenario, this could alternatively be handled using **Windows Task Scheduler** on Windows or **cron** on Linux.
 ##  Data preprocessing
 The data transformation was done in the next way:
   1. Changing some of the most import columns to snake_case style for pottential simplifying the SQL workflow  (Easily could be applied on all columns, but for our purposes we did it for the most crucial columns only)
@@ -65,7 +65,6 @@ JSON validates against the schema. (https://www.jsonschemavalidator.net/)
     "given_name": "Bob",
     "family_name": "Novák",
     "email": ["bob.novak@example.org"]
-    "phone"
   },
 
   "data_provider": {
@@ -88,7 +87,7 @@ JSON validates against the schema. (https://www.jsonschemavalidator.net/)
     "version": "1.0",
     "subject": ["knihovny", "evidence knihoven", "Česko"],
     "statements": {
-      "terms_of_use": ""Použití dat se řídí podmínkami zveřejněnými na webu MK ČR.",
+      "terms_of_use": "Použití dat se řídí podmínkami zveřejněnými na webu MK ČR.",
       "data_licence": "Neudáno",
       "expenses": "0 CZK",
       "provenance": "Staženo z oficiální stránky MK ČR."
