@@ -2,40 +2,55 @@ name: run Retrieval.py
 
 on:
   schedule:
-    - cron: '0 6 * * *' # At 00:00 on Monday
+    - cron: "*/10 * * * *"   # every 10 minutes
+
+# <-- give the job write access to the repo contents
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Avoid mixing tokens (we'll provide our own for pushing)
+          persist-credentials: false
 
-      - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner
-
-      - name: setup python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # install the python version needed
-          
-      - name: install python packages
+          python-version: '3.9'
+
+      - name: Install python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: execute py script # run main.py
+
+      - name: Execute script
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python Retrieval.py
-          
-      - name: commit files
+
+      - name: Commit changes (if any)
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-          
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main 
+          git diff --quiet && echo "No changes to commit" || git commit -m "updated logs"
+
+      # Push using the workflow token
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Re-auth with token because we set persist-credentials: false
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          # Only push if we actually committed something
+          if git log -1 --pretty=%B | grep -q "updated logs"; then
+            git push origin HEAD:main
+          else
+            echo "Nothing to push"
+          fi
