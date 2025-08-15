@@ -53,6 +53,7 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
 ## Describing dataset usig CCMM
 #### JSON for source
 Below you can see how the JSON description of the source of the data can look. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
+JSON validates against the schema. (https://www.jsonschemavalidator.net/)
 ```
 {
   "id": "https://example.org/meta/evidence-knihoven",
