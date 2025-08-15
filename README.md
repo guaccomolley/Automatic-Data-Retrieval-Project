@@ -2,7 +2,7 @@ This project was made as an author's implementation of the task he recently got 
 ## Automatic Data Parcing of libraries database
 This section is dedicated to Data Parcing Process implemented in Python. The data parcing from HTML page was made using library **BeautifulSoup**. The script extracts the URL for the .xlsx file and then downloads it. This way, we don't need a fixed file name, which changes with the date when the new dataset is uploaded. The file is being saved with a date stamp (e.g., library-records_2025-08-06.xlsx) and also as latest (library-records_latest.xlsx). The SHA-256 hash is used to verify file integrity, detect changes, and safely archive only new versions without storing duplicates.
 #### Automatization of the script
-... to be continued ...
+For our purposes, we used GitHub Actions to schedule and execute the process. In a real-world local deployment scenario, this could alternatively be handled using **Windows Task Scheduler** on Windows or **cron** on Linux.
 ##  Data preprocessing
 The data transformation was done in the next way:
   1. Changing some of the most import columns to snake_case style for pottential simplifying the SQL workflow  (Easily could be applied on all columns, but for our purposes we did it for the most crucial columns only)
@@ -16,8 +16,8 @@ The data transformation was done in the next way:
   9. Exporting dataframe as CSV file with UTF-8 encoding.
      
 
-## SUSURITI
-blablabla
+## Data Storage and Security
+To ensure permanent and secure storage of the downloaded data, we would use a central repository with regular backups, such as a database (PostgreSQL, MySQL) or a file system on a secured server. Access would be restricted to authorized users through authentication and encryption
 
 ## Describing dataset usig CCMM
 #### JSON for source
