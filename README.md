@@ -18,6 +18,7 @@ The data transformation was done in the next way:
 
 ## Data Storage and Security
 To ensure permanent and secure storage of the downloaded data, we would use a central repository with regular backups, such as a database (PostgreSQL, MySQL) or a file system on a secured server. Access would be restricted to authorized users through authentication and encryption
+```
            ┌────────────────────┐       
            │   Scheduler/Trigger│
            │ (cron/systemd/CI)  │        
@@ -48,7 +49,7 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
         │ (logs, metrics, alerts,  │
         │  provenance)             │
         └──────────────────────────┘
-
+```
 
 ## Describing dataset usig CCMM
 #### JSON for source
