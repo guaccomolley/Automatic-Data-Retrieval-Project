@@ -57,43 +57,77 @@ For our purposes, we will
 {
   "@context": {
     "ccmm": "https://model.ccmm.cz/research-data/",
-    "dct":  "http://purl.org/dc/terms/",
+    "datacite": "https://model.ccmm.cz/vocabulary/datacite#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dct": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "foaf": "http://xmlns.com/foaf/0.1/",
-    "xsd":  "http://www.w3.org/2001/XMLSchema#"
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "adms": "http://www.w3.org/ns/adms#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
 
-  "@id": "https://example.org/datasets/evidence-knihoven",
+  "@id": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
   "@type": "ccmm:Dataset",
 
-  "dct:title": {
-    "cs": "Evidence knihoven evidovaných MK ČR",
-    "en": "Register of Libraries (Ministry of Culture CZ)"
+  "dct:title": { "cs": "Evidence knihoven evidovaných MK ČR" },
+
+  "datacite:hasDescription": {
+    "@id": "https://example.org/datasets/evidence-knihoven/description1",
+    "@type": "ccmm:Description",
+    "rdfs:label": "Seznam knihoven evidovaných Ministerstvem kultury ČR.",
+    "dct:language": "cs",
+    "dct:type": "abstract"
   },
-  "dct:description": {
-    "cs": "Seznam knihoven evidovaných Ministerstvem kultury ČR a souvisejících informací."
+
+  "ccmm:hasIdentifier": {
+    "@id": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
+    "@type": "ccmm:Identifier",
+    "skos:notation": { "@value": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341", "@type": "xsd:anyURI" },
+    "adms:schemeAgency": "Ministerstvo kultury ČR",
+    "dct:created": { "@value": "2025-08-17", "@type": "xsd:date" }
   },
+
   "dct:publisher": {
-    "@id": "https://example.org/org/mkcr",
-    "@type": "foaf:Organization",
-    "foaf:name": "Ministerstvo kultury ČR"
+    "@id": "https://mk.gov.cz/",
+    "@type": "ccmm:Organization",
+    "rdfs:label": "Ministerstvo kultury České republiky"
   },
-  "dct:issued":   { "@value": "2025-08-15", "@type": "xsd:date" },
+
+  "dct:issued":   { "@value": "2025-08-17", "@type": "xsd:date" },
   "dct:modified": { "@value": "2025-08-17", "@type": "xsd:date" },
 
-  "dct:accessRights": { "@id": "http://purl.org/coar/access_right/c_abf2" }, 
-  "dct:license":      { "@id": "https://creativecommons.org/licenses/by/4.0/" },
+  "ccmm:hasPrimaryLanguage": {
+    "@id": "http://id.loc.gov/vocabulary/iso639-1/cs",
+    "rdfs:label": "čeština"
+  },
 
-  "dcat:distribution": [{
-    "@id": "https://example.org/datasets/evidence-knihoven#dist-xlsx",
-    "@type": "ccmm:Distribution",
-    "dct:title": { "cs": "Ke stažení – XLSX" },
-    "dct:format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "dcat:downloadURL": "https://example.org/downloads/evidence-knihoven.xlsx",
-    "dct:license": { "@id": "https://creativecommons.org/licenses/by/4.0/" }
-  }]
+  "ccmm:hasLocation": {
+    "@id": "http://publications.europa.eu/resource/authority/country/CZE",
+    "rdfs:label": "Czech Republic"
+  },
+
+  "ccmm:hasDistribution": [
+    {
+      "@id": "https://mk.gov.cz/evidence-knihoven/evidence.xlsx",
+      "@type": "ccmm:Distribution",
+      "dct:title": "Evidence knihoven – XLSX",
+      "dct:format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "dcat:mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "dcat:accessURL": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341"
+    }
+  ],
+
+  "ccmm:hasTermsOfUse": {
+    "@id": "https://creativecommons.org/licenses/by/4.0/",
+    "dct:title": "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+  },
+
+  "dct:accrualPeriodicity": {
+    "@id": "http://publications.europa.eu/resource/authority/frequency/IRREG",
+    "rdfs:label": "Irregular"
+  }
 }
 
 ```
-In general, the 
 
