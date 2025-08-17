@@ -52,55 +52,48 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
 
 ## Describing dataset using Czech Core Metadata Model
 The Czech Core Metadata Model (CCMM) is a national metadata model for describing datasets, based on the European DCAT-AP standard. In practice, it is implemented through the so-called DCAT-AP-CZ application profile – an open formal standard for open data catalogues in the Czech Republic. The official documentation of DCAT-AP-CZ is available on the Open Data Portal (ofn.gov.cz) and describes all properties required in the NKOD (Národním katalogu otevřených dat, National Open Data Catalogue).
-For our purposes, we can use the schema provided here: https://www.muni.cz/en/research/publications/2489659. 
+For our purposes, we will 
 ```
 {
-  "id": "library-records-clear",
-  "language": "cs",
-  "date_created": "2025-08-17",
-  "date_updated": "2025-08-17",
-  "patron": {
-    "given_name": "Petr",
-    "family_name": "Novak",
-    "email": ["petr_novak@example.com"]
+  "@context": {
+    "ccmm": "https://model.ccmm.cz/research-data/",
+    "dct":  "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "xsd":  "http://www.w3.org/2001/XMLSchema#"
   },
-  "data_provider": {
-    "organisation": {
-      "name": "Ministerstvo kultury České republiky",
-      "address": "Maltézské náměstí 471/1, Praha 1",
-      "url": "https://mk.gov.cz",
-      "organisation_category": "Government",
-      "contact_person": {
-        "given_name": "Jan",
-        "family_name": "Novák",
-        "email": ["info@mkcr.cz"]
-      }
-    }
-  },
-  "data_specification": {
-    "title": "Evidence knihoven – registrované knihovny v ČR",
-    "identifier": "urn:muni:library-records:2025",
-    "description": "Dataset of libraries registered with the Ministry of Culture of the Czech Republic. Cleaned and standartised version for research project.",
-    "version": "1.0",
-    "subject": ["Libraries", "Public institutions", "Czech Republic"],
-    "statements": {
-      "terms_of_use": "Dataset is publicly available for research purposes.",
-      "data_licence": "CC-BY 4.0",
-      "provenance": "Official registry from Ministry of Culture ČR"
-    },
-    "data_categories": {
-      "data_structure": "Tabular",
-      "data_sensitivity": "Public Data",
-      "data_updates": "Periodically updated"
-    },
-    "distribution": {
-      "data_format": "CSV",
-      "access_instructions": "Dataset can be accessed via the Ministry of Culture webpage or project repository.",
-      "access_url": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
-      "download_url": "TODO"
-    }
-  }
-}
-```
 
+  "@id": "https://example.org/datasets/evidence-knihoven",
+  "@type": "ccmm:Dataset",
+
+  "dct:title": {
+    "cs": "Evidence knihoven evidovaných MK ČR",
+    "en": "Register of Libraries (Ministry of Culture CZ)"
+  },
+  "dct:description": {
+    "cs": "Seznam knihoven evidovaných Ministerstvem kultury ČR a souvisejících informací."
+  },
+  "dct:publisher": {
+    "@id": "https://example.org/org/mkcr",
+    "@type": "foaf:Organization",
+    "foaf:name": "Ministerstvo kultury ČR"
+  },
+  "dct:issued":   { "@value": "2025-08-15", "@type": "xsd:date" },
+  "dct:modified": { "@value": "2025-08-17", "@type": "xsd:date" },
+
+  "dct:accessRights": { "@id": "http://purl.org/coar/access_right/c_abf2" }, 
+  "dct:license":      { "@id": "https://creativecommons.org/licenses/by/4.0/" },
+
+  "dcat:distribution": [{
+    "@id": "https://example.org/datasets/evidence-knihoven#dist-xlsx",
+    "@type": "ccmm:Distribution",
+    "dct:title": { "cs": "Ke stažení – XLSX" },
+    "dct:format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "dcat:downloadURL": "https://example.org/downloads/evidence-knihoven.xlsx",
+    "dct:license": { "@id": "https://creativecommons.org/licenses/by/4.0/" }
+  }]
+}
+
+```
+In general, the 
 
