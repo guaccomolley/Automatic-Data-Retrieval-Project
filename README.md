@@ -96,7 +96,7 @@ For our purposes, we can use the schema provided here: https://www.muni.cz/en/re
     "distribution": {
       "data_format": "CSV",
       "access_instructions": "Dataset can be accessed via the Ministry of Culture webpage or project repository.",
-      "access_url": "https://mk.gov.cz/evidence-knihoven",
+      "access_url": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
       "download_url": "TODO"
     }
   }
