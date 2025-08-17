@@ -50,163 +50,57 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
         └──────────────────────────┘
 ```
 
-## Describing dataset usig CCMM
-#### JSON for source
-Below you can see how the JSON description of the source of the data can look. The used metadata schema can be found here: https://www.muni.cz/en/research/publications/2489659
-JSON validates against the schema. (https://www.jsonschemavalidator.net/)
+## Describing dataset using Czech Core Metadata Model
+The Czech Core Metadata Model (CCMM) is a national metadata model for describing datasets, based on the European DCAT-AP standard. In practice, it is implemented through the so-called DCAT-AP-CZ application profile – an open formal standard for open data catalogues in the Czech Republic. The official documentation of DCAT-AP-CZ is available on the Open Data Portal (ofn.gov.cz) and describes all properties required in the NKOD (Národním katalogu otevřených dat, National Open Data Catalogue).
+For our purposes, we can use the schema provided here: https://www.muni.cz/en/research/publications/2489659. 
 ```
 {
-  "id": "https://example.org/meta/evidence-knihoven",
-  "language": "ces",
-  "date_created": "2025-08-15",
-  "date_updated": "2025-08-15",
-
+  "id": "library-records-clear",
+  "language": "cs",
+  "date_created": "2025-08-17",
+  "date_updated": "2025-08-17",
   "patron": {
-    "given_name": "Bob",
-    "family_name": "Novák",
-    "email": ["bob.novak@example.org"]
+    "given_name": "Petr",
+    "family_name": "Novak",
+    "email": ["petr_novak@example.com"]
   },
-
   "data_provider": {
     "organisation": {
       "name": "Ministerstvo kultury České republiky",
+      "address": "Maltézské náměstí 471/1, Praha 1",
       "url": "https://mk.gov.cz",
       "organisation_category": "Government",
       "contact_person": {
-        "given_name": "Alice",
-        "family_name": "Novakova",
-        "email": ["alice.novakova@example.org"]
+        "given_name": "Jan",
+        "family_name": "Novák",
+        "email": ["info@mkcr.cz"]
       }
     }
   },
-
   "data_specification": {
-    "title": "Evidence knihoven – adresář knihoven evidovaných MK ČR",
-    "identifier": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341",
-    "description": "Oficiální adresář veřejných a dalších knihoven evidovaných Ministerstvem kultury ČR včetně souvisejících informací.",
+    "title": "Evidence knihoven – registrované knihovny v ČR",
+    "identifier": "urn:muni:library-records:2025",
+    "description": "Dataset of libraries registered with the Ministry of Culture of the Czech Republic. Cleaned and standartised version for research project.",
     "version": "1.0",
-    "subject": ["knihovny", "evidence knihoven", "Česko"],
+    "subject": ["Libraries", "Public institutions", "Czech Republic"],
     "statements": {
-      "terms_of_use": "Použití dat se řídí podmínkami zveřejněnými na webu MK ČR.",
-      "data_licence": "Neudáno",
-      "expenses": "0 CZK",
-      "provenance": "Staženo z oficiální stránky MK ČR."
+      "terms_of_use": "Dataset is publicly available for research purposes.",
+      "data_licence": "CC-BY 4.0",
+      "provenance": "Official registry from Ministry of Culture ČR"
     },
     "data_categories": {
       "data_structure": "Tabular",
       "data_sensitivity": "Public Data",
-      "data_updates": "Periodically updated",
-      "date_embargo": ""
+      "data_updates": "Periodically updated"
     },
     "distribution": {
-      "data_format": "text/csv",
-      "access_instructions": "Aktuální soubor hledejte na stránce MK.",
-      "access_url": "https://mk.gov.cz/evidence-knihoven-adresar-knihoven-evidovanych-ministerstvem-kultury-a-souvisejici-informace-cs-341"
-      /* "download_url": "TODO" */
+      "data_format": "CSV",
+      "access_instructions": "Dataset can be accessed via the Ministry of Culture webpage or project repository.",
+      "access_url": "https://mk.gov.cz/evidence-knihoven",
+      "download_url": "(requires website to upload the cleared version)"
     }
   }
 }
-
 ```
-#### JSON scheme for libraries according to our dataset
-```
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "EvidenceKnihovenSchema",
-  "type": "array",
-  "description": "Seznam knihoven evidovaných Ministerstvem kultury (array knihovních záznamů)",
-  "items": {
-    "type": "object",
-    "description": "Záznam jedné knihovny v evidenci",
-    "properties": {
-      "nazev_knihovny": {
-        "type": "string",
-        "description": "Název knihovny"
-      },
-      "evidencni_cislo": {
-        "type": "string",
-        "description": "Evidenční číslo knihovny (unikátní registrační číslo)",
-        "pattern": "^[0-9]+/[0-9]{4}$"
-      },
-      "adresa": {
-        "type": "object",
-        "description": "Adresa knihovny",
-        "properties": {
-          "ulice": {
-            "type": "string",
-            "description": "Ulice a číslo popisné"
-          },
-          "mesto": {
-            "type": "string",
-            "description": "Město nebo obec"
-          },
-          "psc": {
-            "type": "string",
-            "description": "PSČ (poštovní směrovací číslo)",
-            "pattern": "^[0-9]{3}\\s?[0-9]{2}$"
-          },
-          "kraj": {
-            "type": "string",
-            "description": "Kraj (region)",
-            "examples": ["Hlavní město Praha", "Jihomoravský kraj"]
-          }
-        },
-        "required": ["ulice", "mesto", "psc", "kraj"],
-        "additionalProperties": false
-      },
-      "pravni_forma": {
-        "type": "string",
-        "description": "Právní forma organizace knihovny"
-      },
-      "typ_knihovny": {
-        "type": "string",
-        "description": "Typ (druh) knihovny"
-      },
-      "zrizovatel": {
-        "type": "string",
-        "description": "Zřizovatel knihovny (zakladatel/provozovatel)"
-      },
-      "kontaktni_udaje": {
-        "type": "object",
-        "description": "Kontaktní údaje knihovny",
-        "properties": {
-          "telefon": {
-            "type": "string",
-            "description": "Telefonní číslo",
-            "pattern": "^[+]?[0-9 ]+$"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "E-mailová adresa"
-          },
-          "web": {
-            "type": "string",
-            "format": "uri",
-            "description": "Webové stránky knihovny (URL)"
-          }
-        },
-        "additionalProperties": false
-      },
-      "datum_evidence": {
-        "type": "string",
-        "format": "date",
-        "description": "Datum evidence knihovny (datum registrace v evidenci)"
-      }
-    },
-    "required": [
-      "nazev_knihovny",
-      "evidencni_cislo",
-      "adresa",
-      "pravni_forma",
-      "typ_knihovny",
-      "zrizovatel",
-      "kontaktni_udaje",
-      "datum_evidence"
-    ],
-    "additionalProperties": false
-  }
-}
 
 
-```
