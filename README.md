@@ -52,7 +52,8 @@ To ensure permanent and secure storage of the downloaded data, we would use a ce
 
 ## Describing dataset using Czech Core Metadata Model
 The Czech Core Metadata Model (CCMM) is a national metadata model for describing datasets, based on the European DCAT-AP standard. In practice, it is implemented through the so-called DCAT-AP-CZ application profile – an open formal standard for open data catalogues in the Czech Republic. The official documentation of DCAT-AP-CZ is available on the Open Data Portal (ofn.gov.cz) and describes all properties required in the NKOD (Národním katalogu otevřených dat, National Open Data Catalogue).
-For our purposes, we will 
+
+The dataset is described in JSON-LD format by instantiating the relevant CCMM classes and properties. The JSON-LD document uses the CCMM vocabulary and the required external vocabularies (such as ```dcterms```, ```dcat```, ```skos```, and ```adms```).
 ```
 {
   "@context": {
