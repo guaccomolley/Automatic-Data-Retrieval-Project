@@ -1,7 +1,9 @@
 name: run Retrieval.py
+
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "0  13 * * 3"
+    - cron: "0 13 * * 3"    # every Wednesday at 13:00 UTC
 
 permissions:
   contents: write
@@ -10,11 +12,12 @@ jobs:
   run-retrieval:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout latest code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: true
+          ref: ${{ github.ref }}   # ensure correct branch is checked out
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -25,6 +28,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Debug Retrieval.py version
+        run: |
+          echo "=== Showing first 20 lines of Retrieval.py ==="
+          head -n 20 Retrieval.py
 
       - name: Run downloader
         run: |
