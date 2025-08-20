@@ -16,7 +16,7 @@ logging.basicConfig(
 def sha256_bytes(b: bytes) -> str:
     h = hashlib.sha256(); h.update(b); return h.hexdigest()
 
-def get_previous_sha256(latest_path: str) -> str | None:
+def get_previous_sha256(latest_path: str):
     """Vrátí SHA256 z posledního staženého souboru (pokud existuje)."""
     if os.path.exists(latest_path):
         with open(latest_path, "rb") as f:
